@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { LayoutDashboard, Users, Receipt, User, Sparkles } from 'lucide-react';
+import { LayoutDashboard, Route, Users, Receipt, User, Sparkles, Moon, Sun } from 'lucide-react';
+import { useTheme } from '../hooks/useTheme';
 import type { TabId } from './TabBar';
 
 interface SidebarProps {
@@ -8,22 +9,25 @@ interface SidebarProps {
 }
 
 const tabs: { id: TabId; label: string; icon: typeof LayoutDashboard }[] = [
-  { id: 'agenda', label: 'Dashboard', icon: LayoutDashboard },
+  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { id: 'agenda', label: 'Agenda Interactif', icon: Route },
   { id: 'patients', label: 'Patients', icon: Users },
   { id: 'factures', label: 'Factures', icon: Receipt },
   { id: 'profil', label: 'Profil', icon: User },
 ];
 
 export default function Sidebar({ activeTab, onTabChange }: SidebarProps) {
+  const { theme, toggle } = useTheme();
+
   return (
-    <aside className="hidden lg:flex flex-col w-[260px] h-dvh bg-white/80 ios-blur border-r border-ios-separator/30 shrink-0">
+    <aside className="hidden lg:flex flex-col w-[260px] h-dvh bg-ios-card/80 ios-blur border-r border-ios-separator/30 shrink-0">
       {/* Logo */}
       <div className="px-6 pt-8 pb-6 flex items-center gap-3">
         <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-ios-blue to-ios-purple flex items-center justify-center">
           <Sparkles size={20} className="text-white" />
         </div>
         <div>
-          <h1 className="text-[20px] font-bold text-black tracking-tight">PsyFlow</h1>
+          <h1 className="text-[20px] font-bold tracking-tight">PsyFlow</h1>
           <p className="text-[11px] text-ios-gray-2 font-medium">Assistant IA</p>
         </div>
       </div>
@@ -38,9 +42,7 @@ export default function Sidebar({ activeTab, onTabChange }: SidebarProps) {
               key={tab.id}
               onClick={() => onTabChange(tab.id)}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-left transition-all duration-200 relative ${
-                isActive
-                  ? 'bg-ios-blue/10 text-ios-blue'
-                  : 'text-ios-gray-1 hover:bg-ios-gray-6'
+                isActive ? 'text-ios-blue' : 'text-ios-gray-1 hover:bg-ios-gray-6'
               }`}
             >
               {isActive && (
@@ -59,19 +61,33 @@ export default function Sidebar({ activeTab, onTabChange }: SidebarProps) {
               <span className={`text-[15px] font-medium relative z-10 ${isActive ? 'font-semibold' : ''}`}>
                 {tab.label}
               </span>
+              {tab.id === 'agenda' && (
+                <span className="ml-auto relative z-10 px-1.5 py-0.5 rounded-md bg-ios-blue/15 text-ios-blue text-[10px] font-bold">
+                  LIVE
+                </span>
+              )}
             </button>
           );
         })}
       </nav>
 
-      {/* Bottom profile */}
-      <div className="px-4 pb-6 pt-4 border-t border-ios-separator/30">
+      {/* Dark mode toggle + profile */}
+      <div className="px-4 pb-6 pt-4 border-t border-ios-separator/30 space-y-4">
+        <button
+          onClick={toggle}
+          className="w-full flex items-center gap-3 px-4 py-2.5 rounded-2xl text-ios-gray-1 hover:bg-ios-gray-6 transition-all"
+        >
+          {theme === 'dark' ? <Sun size={19} /> : <Moon size={19} />}
+          <span className="text-[14px] font-medium">
+            {theme === 'dark' ? 'Mode clair' : 'Mode sombre'}
+          </span>
+        </button>
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-ios-blue to-ios-purple flex items-center justify-center text-white font-semibold text-sm">
             CM
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-[14px] font-semibold text-black truncate">Dr. Claire Martin</p>
+            <p className="text-[14px] font-semibold truncate">Dr. Claire Martin</p>
             <p className="text-[12px] text-ios-gray-2">Psychologue</p>
           </div>
         </div>

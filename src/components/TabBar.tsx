@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
-import { LayoutDashboard, Users, Receipt, User } from 'lucide-react';
+import { LayoutDashboard, Route, Users, Receipt, User } from 'lucide-react';
 
-export type TabId = 'agenda' | 'patients' | 'factures' | 'profil';
+export type TabId = 'dashboard' | 'agenda' | 'patients' | 'factures' | 'profil';
 
 interface TabBarProps {
   activeTab: TabId;
@@ -9,7 +9,8 @@ interface TabBarProps {
 }
 
 const tabs: { id: TabId; label: string; icon: typeof LayoutDashboard }[] = [
-  { id: 'agenda', label: 'Dashboard', icon: LayoutDashboard },
+  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { id: 'agenda', label: 'Agenda', icon: Route },
   { id: 'patients', label: 'Patients', icon: Users },
   { id: 'factures', label: 'Factures', icon: Receipt },
   { id: 'profil', label: 'Profil', icon: User },
@@ -22,7 +23,6 @@ export default function TabBar({ activeTab, onTabChange }: TabBarProps) {
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
           const Icon = tab.icon;
-
           return (
             <button
               key={tab.id}
@@ -31,11 +31,9 @@ export default function TabBar({ activeTab, onTabChange }: TabBarProps) {
             >
               <div className="relative">
                 <Icon
-                  size={24}
+                  size={22}
                   strokeWidth={isActive ? 2.2 : 1.6}
-                  className={`transition-colors duration-200 ${
-                    isActive ? 'text-ios-blue' : 'text-ios-gray-1'
-                  }`}
+                  className={`transition-colors duration-200 ${isActive ? 'text-ios-blue' : 'text-ios-gray-1'}`}
                   fill={isActive ? 'currentColor' : 'none'}
                 />
                 {isActive && (
@@ -46,11 +44,7 @@ export default function TabBar({ activeTab, onTabChange }: TabBarProps) {
                   />
                 )}
               </div>
-              <span
-                className={`text-[10px] font-medium transition-colors duration-200 ${
-                  isActive ? 'text-ios-blue' : 'text-ios-gray-1'
-                }`}
-              >
+              <span className={`text-[10px] font-medium transition-colors duration-200 ${isActive ? 'text-ios-blue' : 'text-ios-gray-1'}`}>
                 {tab.label}
               </span>
             </button>

@@ -3,26 +3,25 @@ import { motion, AnimatePresence } from 'framer-motion';
 import TabBar, { type TabId } from './components/TabBar';
 import Sidebar from './components/Sidebar';
 import DashboardPage from './pages/DashboardPage';
+import AgendaInteractifPage from './pages/AgendaInteractifPage';
 import PatientsPage from './pages/PatientsPage';
 import InvoicesPage from './pages/InvoicesPage';
 import ProfilePage from './pages/ProfilePage';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<TabId>('agenda');
+  const [activeTab, setActiveTab] = useState<TabId>('dashboard');
 
   const pages: Record<TabId, React.ReactNode> = {
-    agenda: <DashboardPage />,
+    dashboard: <DashboardPage />,
+    agenda: <AgendaInteractifPage />,
     patients: <PatientsPage />,
     factures: <InvoicesPage />,
     profil: <ProfilePage />,
   };
 
   return (
-    <div className="min-h-dvh bg-ios-bg flex">
-      {/* Desktop sidebar */}
+    <div className="min-h-dvh bg-ios-bg flex transition-colors duration-300">
       <Sidebar activeTab={activeTab} onTabChange={setActiveTab} />
-
-      {/* Main content */}
       <main className="flex-1 min-h-dvh overflow-y-auto">
         <AnimatePresence mode="wait">
           <motion.div
@@ -37,8 +36,6 @@ export default function App() {
           </motion.div>
         </AnimatePresence>
       </main>
-
-      {/* Mobile tab bar */}
       <TabBar activeTab={activeTab} onTabChange={setActiveTab} />
     </div>
   );

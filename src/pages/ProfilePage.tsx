@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Trash2 } from 'lucide-react';
+import { Download, Trash2, Moon, Sun } from 'lucide-react';
+import { useTheme } from '../hooks/useTheme';
 
 function Toggle({ on, onToggle }: { on: boolean; onToggle: () => void }) {
   return (
@@ -43,6 +44,7 @@ function Separator() {
 }
 
 export default function ProfilePage() {
+  const { theme, toggle } = useTheme();
   return (
     <div className="min-h-full">
       <div className="px-5 lg:px-8 pt-6 lg:pt-8">
@@ -102,6 +104,22 @@ export default function ProfilePage() {
             <SettingRow label="TVA" value="Non assujetti" />
             <Separator />
             <SettingRow label="Format facture" value="Factur-X" />
+          </div>
+        </div>
+
+        {/* Apparence */}
+        <div>
+          <p className="text-[13px] font-semibold text-ios-gray-1 uppercase tracking-wide px-1 mb-2">
+            Apparence
+          </p>
+          <div className="ios-card px-4">
+            <div className="flex items-center justify-between py-3">
+              <div className="flex items-center gap-3">
+                {theme === 'dark' ? <Moon size={18} className="text-ios-purple" /> : <Sun size={18} className="text-ios-orange" />}
+                <span className="text-[15px]">Mode sombre</span>
+              </div>
+              <Toggle on={theme === 'dark'} onToggle={toggle} />
+            </div>
           </div>
         </div>
 

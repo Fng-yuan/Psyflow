@@ -17,6 +17,28 @@
   --color-ios-bg: #F2F2F7;
   --color-ios-card: #FFFFFF;
   --color-ios-separator: #C6C6C8;
+  --color-ios-text: #000000;
+  --color-ios-text-secondary: #3C3C43;
+}
+
+/* ───── Dark theme overrides ───── */
+.dark {
+  --color-ios-gray-1: #98989D;
+  --color-ios-gray-2: #636366;
+  --color-ios-gray-3: #48484A;
+  --color-ios-gray-4: #3A3A3C;
+  --color-ios-gray-5: #2C2C2E;
+  --color-ios-gray-6: #1C1C1E;
+  --color-ios-bg: #000000;
+  --color-ios-card: #1C1C1E;
+  --color-ios-separator: #38383A;
+  --color-ios-text: #FFFFFF;
+  --color-ios-text-secondary: #EBEBF5;
+  --color-ios-blue: #0A84FF;
+  --color-ios-green: #30D158;
+  --color-ios-orange: #FF9F0A;
+  --color-ios-red: #FF453A;
+  --color-ios-purple: #BF5AF2;
 }
 
 * {
@@ -27,8 +49,9 @@
 
 html {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
-  background-color: #F2F2F7;
+  background-color: var(--color-ios-bg);
   overscroll-behavior: none;
+  transition: background-color 0.3s;
 }
 
 body {
@@ -36,51 +59,43 @@ body {
   padding: 0;
   min-height: 100dvh;
   overscroll-behavior: none;
+  color: var(--color-ios-text);
 }
 
 #root {
   min-height: 100dvh;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
-
-* {
-  scrollbar-width: none;
-}
+::-webkit-scrollbar { display: none; }
+* { scrollbar-width: none; }
 
 input, textarea, select {
   font-family: inherit;
   outline: none;
+  color: inherit;
 }
 
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
 @keyframes scaleIn {
   from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
 }
-
-.animate-slide-up {
-  animation: slideUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0,122,255,0.4); }
+  50% { box-shadow: 0 0 20px 4px rgba(0,122,255,0.2); }
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.4s ease both;
-}
-
-.animate-scale-in {
-  animation: scaleIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
+.animate-slide-up { animation: slideUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+.animate-fade-in { animation: fadeIn 0.4s ease both; }
+.animate-scale-in { animation: scaleIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+.animate-pulse-glow { animation: pulse-glow 2s infinite; }
 
 .ios-blur {
   backdrop-filter: saturate(180%) blur(20px);
@@ -88,33 +103,44 @@ input, textarea, select {
 }
 
 .ios-card {
-  background: white;
+  background: var(--color-ios-card);
   border-radius: 16px;
   box-shadow: 0 0 0 0.5px rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.04);
+  transition: background-color 0.3s;
+}
+.dark .ios-card {
+  box-shadow: 0 0 0 0.5px rgba(255,255,255,0.06), 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .ios-card-elevated {
-  background: white;
+  background: var(--color-ios-card);
   border-radius: 16px;
   box-shadow: 0 0 0 0.5px rgba(0,0,0,0.04), 0 4px 24px rgba(0,0,0,0.08);
+  transition: background-color 0.3s;
+}
+.dark .ios-card-elevated {
+  box-shadow: 0 0 0 0.5px rgba(255,255,255,0.06), 0 4px 24px rgba(0,0,0,0.5);
 }
 
 .ios-input {
-  background: #F2F2F7;
+  background: var(--color-ios-gray-6);
   border-radius: 12px;
   padding: 12px 16px;
   border: none;
   font-size: 17px;
   width: 100%;
   transition: background 0.2s;
+  color: var(--color-ios-text);
 }
-
 .ios-input:focus {
-  background: #E5E5EA;
+  background: var(--color-ios-gray-5);
+}
+.ios-input::placeholder {
+  color: var(--color-ios-gray-2);
 }
 
 .ios-button {
-  background: #007AFF;
+  background: var(--color-ios-blue);
   color: white;
   border: none;
   border-radius: 14px;
@@ -125,8 +151,29 @@ input, textarea, select {
   transition: all 0.2s;
   width: 100%;
 }
-
 .ios-button:active {
   transform: scale(0.97);
   opacity: 0.85;
+}
+
+/* Text color helpers for dark mode */
+.text-black { color: var(--color-ios-text); }
+.dark .bg-white { background-color: var(--color-ios-card); }
+.dark .bg-white\/80 { background-color: rgba(28,28,30,0.8); }
+.dark .bg-ios-card\/80 { background-color: rgba(28,28,30,0.8); }
+.dark .border-black\/5 { border-color: rgba(255,255,255,0.06); }
+
+/* Roadmap timeline */
+.roadmap-line {
+  position: absolute;
+  left: 23px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--color-ios-blue), var(--color-ios-purple));
+  border-radius: 2px;
+  opacity: 0.2;
+}
+.roadmap-line-active {
+  opacity: 1;
 }
