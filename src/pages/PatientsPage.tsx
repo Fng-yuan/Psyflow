@@ -39,13 +39,13 @@ export default function PatientsPage() {
   return (
     <div className="min-h-full">
       {/* Header */}
-      <div className="px-4 pt-[env(safe-area-inset-top)]">
+      <div className="px-5 lg:px-8 pt-6 lg:pt-8">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           className="mt-4 flex items-baseline gap-2"
         >
-          <h1 className="text-[28px] font-bold text-black tracking-tight">Patients</h1>
+          <h1 className="text-[28px] lg:text-[34px] font-bold text-black tracking-tight">Patients</h1>
           <span className="text-[15px] text-ios-gray-1 font-medium">{patients.length}</span>
         </motion.div>
 
@@ -84,7 +84,7 @@ export default function PatientsPage() {
         variants={container}
         initial="hidden"
         animate="show"
-        className="px-4 mt-4 space-y-2.5"
+        className="px-5 lg:px-8 mt-4 space-y-2.5 lg:grid lg:grid-cols-2 xl:grid-cols-3 lg:gap-3 lg:space-y-0"
       >
         {filtered.map((p) => (
           <motion.div key={p.id} variants={item}>

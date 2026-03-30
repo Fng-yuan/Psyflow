@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Calendar, Users, Receipt, User } from 'lucide-react';
+import { LayoutDashboard, Users, Receipt, User } from 'lucide-react';
 
 export type TabId = 'agenda' | 'patients' | 'factures' | 'profil';
 
@@ -8,8 +8,8 @@ interface TabBarProps {
   onTabChange: (tab: TabId) => void;
 }
 
-const tabs: { id: TabId; label: string; icon: typeof Calendar }[] = [
-  { id: 'agenda', label: 'Agenda', icon: Calendar },
+const tabs: { id: TabId; label: string; icon: typeof LayoutDashboard }[] = [
+  { id: 'agenda', label: 'Dashboard', icon: LayoutDashboard },
   { id: 'patients', label: 'Patients', icon: Users },
   { id: 'factures', label: 'Factures', icon: Receipt },
   { id: 'profil', label: 'Profil', icon: User },
@@ -17,8 +17,8 @@ const tabs: { id: TabId; label: string; icon: typeof Calendar }[] = [
 
 export default function TabBar({ activeTab, onTabChange }: TabBarProps) {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 ios-blur bg-ios-card/80 border-t border-ios-separator/50 pb-[env(safe-area-inset-bottom)]">
-      <div className="flex justify-around items-center h-[50px] max-w-lg mx-auto">
+    <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 ios-blur bg-ios-card/80 border-t border-ios-separator/50 pb-[env(safe-area-inset-bottom)]">
+      <div className="flex justify-around items-center h-[50px]">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
           const Icon = tab.icon;

@@ -45,17 +45,17 @@ function Separator() {
 export default function ProfilePage() {
   return (
     <div className="min-h-full">
-      <div className="px-4 pt-[env(safe-area-inset-top)]">
+      <div className="px-5 lg:px-8 pt-6 lg:pt-8">
         <motion.h1
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-4 text-[28px] font-bold text-black tracking-tight"
+          className="mt-4 text-[28px] lg:text-[34px] font-bold text-black tracking-tight"
         >
           Profil
         </motion.h1>
       </div>
 
-      <div className="px-4 mt-5 space-y-5 pb-8">
+      <div className="px-5 lg:px-8 mt-5 space-y-5 pb-8 lg:max-w-2xl">
         {/* Profile card */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}

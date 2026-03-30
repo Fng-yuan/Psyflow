@@ -62,14 +62,14 @@ export default function PatientDetailPage({ patient, onBack }: Props) {
       className="min-h-full bg-ios-bg"
     >
       {/* Nav bar */}
-      <div className="px-4 pt-[env(safe-area-inset-top)] pb-2 flex items-center gap-2 mt-2">
+      <div className="px-5 lg:px-8 pt-6 lg:pt-8 pb-2 flex items-center gap-2">
         <button onClick={onBack} className="flex items-center gap-1 text-ios-blue">
           <ChevronLeft size={22} />
           <span className="text-[17px]">Patients</span>
         </button>
       </div>
 
-      <div className="px-4 space-y-4 pb-8">
+      <div className="px-5 lg:px-8 space-y-4 pb-8 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0 lg:items-start">
         {/* Section 1: C'est qui? */}
         <div className="ios-card p-4">
           <p className="text-[11px] font-semibold text-ios-gray-2 uppercase tracking-wider mb-3">C'est qui ?</p>

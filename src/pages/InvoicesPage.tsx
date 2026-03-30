@@ -24,11 +24,11 @@ export default function InvoicesPage() {
 
   return (
     <div className="min-h-full">
-      <div className="px-4 pt-[env(safe-area-inset-top)]">
+      <div className="px-5 lg:px-8 pt-6 lg:pt-8">
         <motion.h1
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-4 text-[28px] font-bold text-black tracking-tight"
+          className="mt-4 text-[28px] lg:text-[34px] font-bold text-black tracking-tight"
         >
           Factures
         </motion.h1>
@@ -38,7 +38,7 @@ export default function InvoicesPage() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="grid grid-cols-3 gap-2.5 mt-5"
+          className="grid grid-cols-3 gap-3 mt-5"
         >
           <div className="ios-card p-3 text-center">
             <div className="w-8 h-8 rounded-xl bg-ios-blue/10 flex items-center justify-center mx-auto mb-1.5">
@@ -84,7 +84,7 @@ export default function InvoicesPage() {
         variants={container}
         initial="hidden"
         animate="show"
-        className="px-4 mt-4 space-y-2.5"
+        className="px-5 lg:px-8 mt-4 space-y-2.5 lg:grid lg:grid-cols-2 xl:grid-cols-3 lg:gap-3 lg:space-y-0"
       >
         {displayedInvoices.map((inv) => (
           <motion.div key={inv.id} variants={item}>
@@ -94,7 +94,7 @@ export default function InvoicesPage() {
       </motion.div>
 
       {/* Export button */}
-      <div className="px-4 mt-6 pb-8">
+      <div className="px-5 lg:px-8 mt-6 pb-8">
         <button className="ios-button flex items-center justify-center gap-2">
           <Download size={18} />
           Exporter en PDF
